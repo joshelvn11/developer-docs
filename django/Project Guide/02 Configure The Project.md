@@ -63,23 +63,36 @@ MIDDLEWARE = [
 
 This setting configures how Django loads and renders templates. You might want to specify directories where Django looks for template files.
 
-- **Example**:
+In `settings.py` create a `TEMPLATES_DIR` constant to build a path for our subdirectory 'templates':
+
+```python
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+```
+
+Add the `TEMPLATES_DIR` to `DIRS` list:
 
 ```python
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Custom template directory
+        'DIRS': [TEMPLATES_DIR],  # Custom template directory
         'APP_DIRS': True,
     },
 ]
+```
+
+Finally create the top-level demplates directory in your project folder:
+
+```bash
+$ mkdir templates
 ```
 
 ### Static Files
 
 Static files (CSS, JavaScript, images) are served from the `STATIC_URL` path. You might need to add directories where Django looks for these files using `STATICFILES_DIRS`, and specify where to collect static files for deployment with `STATIC_ROOT`.
 
-- **Example**:
+**Example**:
 
 ```python
 STATIC_URL = '/static/'

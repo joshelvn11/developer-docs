@@ -27,7 +27,17 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / "staticfiles"  # Collect static to here for production
 ```
 
-### Step 3: Use Static Files in Templates
+### Step 3: Create Static Files Directory
+
+Create the static files directory in the top level directory of your project
+
+```bash
+$ mkdir static
+```
+
+You can now create further directories inside this for `css` and `js` and create the releveant files too.
+
+### Step 4: Use Static Files in Templates
 
 To use static files in your templates, first load the `{% static %}` template tag:
 
