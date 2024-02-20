@@ -1,6 +1,6 @@
 # Models
 
-Django models are a critical component of Django, a high-level Python web framework that encourages rapid development and clean, pragmatic design. Models in Django serve as the definitive source of information about your data. They contain the essential fields and behaviors of the data you’re storing; essentially, each model maps to a single database table. In this explanation, we'll explore what models are, how they work, and how to use them effectively in a Django project, all in a beginner-friendly manner.
+Django models are a critical component of Django, a high-level Python web framework that encourages rapid development and clean, pragmatic design. Models in Django serve as the definitive source of information about your data. They contain the essential fields and behaviors of the data you’re storing; essentially, each model maps to a single database table.
 
 ## Understanding Django Models
 

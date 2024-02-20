@@ -1,6 +1,6 @@
 # Views
 
-Django views play a crucial role in web applications built with Django, acting as the logic layer that connects models and templates. When a user requests a page in a Django application, the request is processed by a view, which interacts with the model and decides what data to display in a template. Let's break down the concept of views in Django to make it understandable for beginners.
+Django views play a crucial role in web applications built with Django, acting as the logic layer that connects models and templates. When a user requests a page in a Django application, the request is processed by a view, which interacts with the model and decides what data to display in a template. L
 
 ## Understanding Django Views
 
