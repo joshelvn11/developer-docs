@@ -38,6 +38,69 @@ Filters can also accept arguments. For example, the `date` filter formats Python
 <p>The date is {{ current_date|date:"D d M Y" }}.</p>
 ```
 
+#### List of Filters
+
+| Filter Name          | Description                                                                                                                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `add`                | Adds the argument to the value.                                                                                                                                                               |
+| `addslashes`         | Adds slashes before quotes.                                                                                                                                                                   |
+| `capfirst`           | Capitalizes the first character of the value.                                                                                                                                                 |
+| `center`             | Centers the value in a field of a given width.                                                                                                                                                |
+| `cut`                | Removes all values of the argument from the given string.                                                                                                                                     |
+| `date`               | Formats a date according to the given format.                                                                                                                                                 |
+| `default`            | If the value is falsy, use the given default.                                                                                                                                                 |
+| `default_if_none`    | If the value is `None`, use the given default.                                                                                                                                                |
+| `dictsort`           | Takes a list of dictionaries and returns that list sorted by the key given in the argument.                                                                                                   |
+| `dictsortreversed`   | Same as `dictsort` but in reverse order.                                                                                                                                                      |
+| `divisibleby`        | Returns `True` if the value is divisible by the argument.                                                                                                                                     |
+| `escape`             | Escapes HTML in the value, replacing characters like `<` and `>` with their entity references.                                                                                                |
+| `escapejs`           | Escapes characters for use in JavaScript strings.                                                                                                                                             |
+| `filesizeformat`     | Formats the value like a 'human-readable' file size (e.g., `'13 KB'`).                                                                                                                        |
+| `first`              | Returns the first item of a list.                                                                                                                                                             |
+| `floatformat`        | Formats a floating-point number to a specified number of decimal places.                                                                                                                      |
+| `get_digit`          | Returns the nth digit of a number, from the right.                                                                                                                                            |
+| `iriencode`          | Encodes an IRI value to be safe for URLs.                                                                                                                                                     |
+| `join`               | Joins a list with a string, similar to Python's `str.join(list)`.                                                                                                                             |
+| `json_script`        | Safely outputs a Python object as JSON, wrapped in a `<script>` tag.                                                                                                                          |
+| `length`             | Returns the length of the value.                                                                                                                                                              |
+| `length_is`          | Returns `True` if the value's length is the argument.                                                                                                                                         |
+| `linebreaks`         | Replaces line breaks in plain text with appropriate HTML; a single newline becomes an HTML line break (`<br>`) and a new line followed by a blank line becomes a paragraph break (`<p>`).     |
+| `linebreaksbr`       | Converts all newlines in a piece of plain text to HTML line breaks (`<br>`).                                                                                                                  |
+| `linenumbers`        | Displays text with line numbers.                                                                                                                                                              |
+| `ljust`              | Left-justifies in a field of a given width.                                                                                                                                                   |
+| `lower`              | Converts text to lowercase.                                                                                                                                                                   |
+| `make_list`          | Returns the value turned into a list.                                                                                                                                                         |
+| `phone2numeric`      | Converts a phone number (containing letters) to its numerical equivalent.                                                                                                                     |
+| `pluralize`          | Returns a plural suffix if the value is not 1. By default, this suffix is `'s'`.                                                                                                              |
+| `pprint`             | Outputs a pretty-printed version of a Python object.                                                                                                                                          |
+| `random`             | Returns a random item from the list.                                                                                                                                                          |
+| `safe`               | Marks a string as not requiring further HTML escaping.                                                                                                                                        |
+| `safeseq`            | Marks each item in a sequence as safe.                                                                                                                                                        |
+| `slice`              | Returns a slice of the list.                                                                                                                                                                  |
+| `slugify`            | Converts to ASCII, converts spaces to hyphens, removes characters that aren't alphanumerics, underscores, or hyphens, converts to lowercase, and also strips leading and trailing whitespace. |
+| `stringformat`       | Formats the variable according to the argument, a string formatting specifier.                                                                                                                |
+| `striptags`          | Strips all [X]HTML tags.                                                                                                                                                                      |
+| `time`               | Formats a time according to the given format.                                                                                                                                                 |
+| `timesince`          | Formats a date as the time since that date (e.g., "4 days, 6 hours").                                                                                                                         |
+| `timeuntil`          | Formats a date as the time until that date (e.g., "4 days, 6 hours").                                                                                                                         |
+| `title`              | Converts to titlecase.                                                                                                                                                                        |
+| `truncatechars`      | Truncates a string if it is longer than the specified number of characters.                                                                                                                   |
+| `truncatechars_html` | Truncates HTML to a certain number of chars (ignoring tags and preserving HTML integrity).                                                                                                    |
+| `truncatewords`      | Truncates a string after a certain number of words.                                                                                                                                           |
+| `truncatewords_html` | Truncates                                                                                                                                                                                     |
+
+HTML to a certain number of words (ignoring tags and preserving HTML integrity). |
+| `unordered_list` | Takes a list and returns an HTML unordered list - effectively a recursive version of the `|join` filter. |
+| `upper` | Converts text to uppercase. |
+| `urlencode` | Escapes a value for use in a URL. |
+| `urlize` | Converts URLs in plain text into clickable links. |
+| `urlizetrunc` | Converts URLs into clickable links, truncating URLs longer than the given character limit. |
+| `wordcount` | Returns the number of words. |
+| `wordwrap` | Wraps words at specified line length. |
+| `yesno` | Maps values to other values, like a switch statement. |
+
+This table offers a snapshot of the available DTL filters as of Django 3.2. For the most current and comprehensive list, always refer to the [official Django documentation](https://docs.djangoproject.com/en/stable/ref/templates/builtins/#built-in-filter-reference).
+
 ### Tags
 
 Tags provide more complex logic than variables can handle. They're wrapped in `{% %}`. Tags can do many things, such as looping through lists, loading external templates, or checking conditions.
