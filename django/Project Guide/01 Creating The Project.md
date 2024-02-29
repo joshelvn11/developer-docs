@@ -1,4 +1,4 @@
-# Creating The Project
+# 1. Creating The Project
 
 Creating a Django project is the first step towards building a web application using the Django framework. This guide will walk you through the process step by step, including explanations of complex topics and code snippets to help you understand each part of the process.
 
@@ -87,18 +87,6 @@ Django comes with a built-in development server to test your project locally.
 2. **View Your Project**:
 
    - Open a web browser and go to http://127.0.0.1:8000/. You should see the Django welcome screen, indicating the project is running successfully.
-
-## Step 6: Next Steps
-
-- **Create an App**: Django projects are organized into "apps", modular components that can handle different aspects of your project's functionality. Create your first app by running:
-
-  ```bash
-  python manage.py startapp myapp
-  ```
-
-- **Explore `settings.py`**: Familiarize yourself with the settings file to understand how Django projects are configured.
-
-- **Learn About URLs**: Look into `urls.py` to start mapping URLs to views for your app.
 
 ## Conclusion
 

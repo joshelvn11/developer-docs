@@ -1,4 +1,4 @@
-# Create An Application
+# 3. Create An Application
 
 Creating a Django application within your project involves several key steps, from initializing the app to defining data models and setting up the database tables through migrations. Here's a detailed, beginner-friendly guide to walk you through each of these steps.
 
