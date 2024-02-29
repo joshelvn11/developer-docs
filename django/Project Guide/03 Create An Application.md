@@ -16,6 +16,22 @@ Every Django project consists of one or more apps, which are self-contained comp
 
    Replace `myapp` with your desired app name. This command creates a new directory with the name of your app and initializes it with a set of files.
 
+## Step 2: Add to `INSTALLED_APPS`
+
+Add your app to the `INSTALLED_APPS` list in the `settings.py` file of your project.
+
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles'
+    'myapp,
+]
+```
+
 ## Step 2: Define Models
 
 Models in Django are Python classes that define the structure of your database tables. They represent the data of your application and include the essential fields and behaviors of the stored data.

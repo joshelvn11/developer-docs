@@ -87,17 +87,15 @@ Filters can also accept arguments. For example, the `date` filter formats Python
 | `truncatechars`      | Truncates a string if it is longer than the specified number of characters.                                                                                                                   |
 | `truncatechars_html` | Truncates HTML to a certain number of chars (ignoring tags and preserving HTML integrity).                                                                                                    |
 | `truncatewords`      | Truncates a string after a certain number of words.                                                                                                                                           |
-| `truncatewords_html` | Truncates                                                                                                                                                                                     |
-
-HTML to a certain number of words (ignoring tags and preserving HTML integrity). |
-| `unordered_list` | Takes a list and returns an HTML unordered list - effectively a recursive version of the `|join` filter. |
-| `upper` | Converts text to uppercase. |
-| `urlencode` | Escapes a value for use in a URL. |
-| `urlize` | Converts URLs in plain text into clickable links. |
-| `urlizetrunc` | Converts URLs into clickable links, truncating URLs longer than the given character limit. |
-| `wordcount` | Returns the number of words. |
-| `wordwrap` | Wraps words at specified line length. |
-| `yesno` | Maps values to other values, like a switch statement. |
+| `truncatewords_html` | Truncates HTML to a certain number of words (ignoring tags and preserving HTML integrity).                                                                                                    |
+| `unordered_list`     | Takes a list and returns an HTML unordered list - effectively a recursive version of the `join` filter.                                                                                       |
+| `upper`              | Converts text to uppercase.                                                                                                                                                                   |
+| `urlencode`          | Escapes a value for use in a URL.                                                                                                                                                             |
+| `urlize`             | Converts URLs in plain text into clickable links.                                                                                                                                             |
+| `urlizetrunc`        | Converts URLs into clickable links, truncating URLs longer than the given character limit.                                                                                                    |
+| `wordcount`          | Returns the number of words.                                                                                                                                                                  |
+| `wordwrap`           | Wraps words at specified line length.                                                                                                                                                         |
+| `yesno`              | Maps values to other values, like a switch statement.                                                                                                                                         |
 
 This table offers a snapshot of the available DTL filters as of Django 3.2. For the most current and comprehensive list, always refer to the [official Django documentation](https://docs.djangoproject.com/en/stable/ref/templates/builtins/#built-in-filter-reference).
 
@@ -117,13 +115,13 @@ Tags provide more complex logic than variables can handle. They're wrapped in `{
 
 **If Statement**:
 
-    ```html
-    {% if user.is_authenticated %}
-      <p>Welcome, {{ user.username }}!</p>
-    {% else %}
-      <p>Welcome, guest!</p>
-    {% endif %}
-    ```
+```html
+{% if user.is_authenticated %}
+<p>Welcome, {{ user.username }}!</p>
+{% else %}
+<p>Welcome, guest!</p>
+{% endif %}
+```
 
 ## Inheritance in Django Templates
 

@@ -2,123 +2,101 @@
 
 Configuring your Django project involves setting up various components to ensure your application runs smoothly, handles data correctly, and serves static content properly. This step is crucial for tailoring the Django framework to the needs of your specific project. Let's delve into how to configure your project, focusing on the `settings.py` file, database setup, and handling static files.
 
-## Adjusting Settings in `settings.py`
+## Step 1: Connect A Database
 
-The `settings.py` file in your Django project directory contains configuration for your project. Here are some of the key settings you'll likely need to adjust:
+By default, Django uses SQLite. The following steps will show you how to connect to a remote PostgreSQL database.
 
-### Databases
+### Step 1: Create the databse
 
-By default, Django uses SQLite. To configure a different database (e.g., PostgreSQL), you'll need to change the `DATABASES` setting.
+Create a new database in your PostgreSQL server.
 
-- **Example for PostgreSQL**:
+### Step 2: Install packages
+
+Install the `psycopg2` and `dj-database-url` packages in your virtual environment and add them to your requirements file.
+
+```bash
+pip3 install psycopg2 dj-database-url
+```
+
+```bash
+pip3 freeze > requirements.txt
+```
+
+### Step 3: Create an environment variable for the database URL
+
+Create an env.py file in your project directory to store the database URL as an environment variable.
+
+```bash
+touch env.py
+```
+
+In the newly created env.py file, add the following line to store the database URL as an environment variable:
 
 ```python
+import os
+
+os.environ['DATABASE_URL'] = '<your-database-url>'
+```
+
+Remember to add env.py to your .gitignore file to avoid committing sensitive information to your repository.
+
+You can then add `DATABSE_URL` as an environment variable in your deployment platform.
+
+### Step 4: Import `env.py` into `settings.py`
+
+In your `settings.py` file, import the `env.py` file to access the database URL environment variable.
+
+```python
+# settings.py
+
+import os
+import dj_database_url
+if os.path.isfile('env.py'):
+    import env
+```
+
+Then comment out the default SQLite config in `settings.py`:
+
+```python
+# settings.py
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+```
+
+Then connect the database using the `dj_database_url` package and `DATABASE_URL` environment variable.
+
+```python
+#settings.py
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 ```
 
-You'll need to install the appropriate database adapter (e.g., `psycopg2` for PostgreSQL) in your virtual environment:
+### Step 5: Run migrations
+
+Now that the databse is connected you can run the migrations to create the tables in the database.
 
 ```bash
-pip install psycopg2
+python3 manage.py migrate
 ```
 
-### Installed Apps
+## Step 2: Create a Superuser
 
-Here you can add or remove applications from your Django project. To add an app you've created or a third-party app, add its name to the `INSTALLED_APPS` list.
-
-- **Example**:
-
-```python
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'myapp',  # Your custom app
-    'rest_framework',  # An example third-party app
-]
-```
-
-### Middleware
-
-Middleware is a framework of hooks into Django's request/response processing. It's a lightweight, low-level plugin system for globally altering Django's input or output. If you need to add custom middleware or use middleware from third-party apps, you'll add them here.
-
-- **Example**:
-
-```python
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'mycustommiddleware.SomeMiddleware',  # Your custom middleware
-]
-```
-
-### Templates
-
-This setting configures how Django loads and renders templates. You might want to specify directories where Django looks for template files.
-
-In `settings.py` create a `TEMPLATES_DIR` constant to build a path for our subdirectory 'templates':
-
-```python
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-```
-
-Add the `TEMPLATES_DIR` to `DIRS` list:
-
-```python
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],  # Custom template directory
-        'APP_DIRS': True,
-    },
-]
-```
-
-Finally create the top-level demplates directory in your project folder:
+Create a superuser in the database to access the Django admin site.
 
 ```bash
-$ mkdir templates
+python3 manage.py createsuperuser
 ```
 
-### Static Files
+You will then be prompted to enter a username, email, and password for the superuser.
 
-Static files (CSS, JavaScript, images) are served from the `STATIC_URL` path. You might need to add directories where Django looks for these files using `STATICFILES_DIRS`, and specify where to collect static files for deployment with `STATIC_ROOT`.
-
-**Example**:
-
-```python
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static',]  # Custom static file directories
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Directory for `collectstatic` to collect static files to
-```
-
-## Database Setup
-
-After configuring your database in `settings.py`, you need to set up the database tables that Django uses internally, along with any models you've defined in your apps.
-
-1. **Run Migrations**: Migrations apply changes to your database schema.
-
-   ```bash
-   python manage.py migrate
-   ```
-
-   This command looks at the `INSTALLED_APPS` setting and creates any necessary database tables according to the database settings in `settings.py` and the migrations defined in each application.
-
-2. **Create a Superuser** (optional but recommended for accessing the Django admin site):
-
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-   Follow the prompts to create a user account.
+You can then access the Django admin site by running the development server and navigating to `http://127.0.0.1:8000/admin/` in your web browser.
 
 ## Conclusion
 

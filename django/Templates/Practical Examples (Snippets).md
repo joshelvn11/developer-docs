@@ -218,3 +218,79 @@ This CSS adds basic styling to your pagination links, making them more visually 
 ### Conclusion
 
 By following these steps, you've successfully implemented pagination in your Django application. Pagination is crucial for improving the usability of your app, especially when dealing with large datasets. Django's `Paginator` class simplifies this process, allowing you to create efficient, scalable, and user-friendly paginated views.
+
+## Passing Contextual Data To JavaScript
+
+Passing context from Django to JavaScript can be achieved in several ways, allowing you to dynamically use Django variables within your JavaScript code. Here are three common methods to do this, each suitable for different scenarios:
+
+### Method 1: Inline Script Tag
+
+You can directly include Django template variables within a `<script>` tag in your HTML template. This method is straightforward for passing simple data types like strings, integers, or lists.
+
+#### Example:
+
+```html
+<!-- In your Django template -->
+<script type="text/javascript">
+  var myVar = '{{ django_variable }}';
+  var myList = {{ django_list|safe }};
+</script>
+```
+
+- Use the `{{ django_variable }}` syntax to inject Django template variables directly into your JavaScript code.
+- To pass more complex data types like lists or dictionaries, use the `|safe` filter to prevent Django from escaping the JSON string.
+
+### Method 2: Data Attributes
+
+For a cleaner separation of HTML and JavaScript, you can use data attributes in your HTML elements to store Django context variables. Then, access these attributes via JavaScript.
+
+#### Example:
+
+```html
+<!-- In your Django template -->
+<div
+  id="my-div"
+  data-my-var="{{ django_variable }}"
+  data-my-list="{{ django_list|safe }}"
+></div>
+
+<script type="text/javascript">
+  var myVar = document.getElementById("my-div").getAttribute("data-my-var");
+  var myList = JSON.parse(
+    document.getElementById("my-div").getAttribute("data-my-list")
+  );
+</script>
+```
+
+- This method keeps the JavaScript clean of Django template syntax.
+- Use `JSON.parse()` to convert JSON strings into JavaScript objects or arrays.
+
+### Method 3: Using the `json_script` Template Tag
+
+Django 2.1 introduced the `json_script` template tag, which securely outputs a Python dictionary as a JSON object within a `<script>` tag. This method is especially useful for passing complex data structures like dictionaries or lists of objects.
+
+#### Example:
+
+```html
+<!-- In your Django template -->
+{% json_script "django_variables" %} { "myVar": "{{ django_variable }}",
+"myList": {{ django_list|safe }} } {% endjson_script %}
+
+<script type="text/javascript">
+  var djangoData = JSON.parse(
+    document.getElementById("django_variables").textContent
+  );
+  var myVar = djangoData.myVar;
+  var myList = djangoData.myList;
+</script>
+```
+
+- The `json_script` tag takes a unique identifier as its first argument and outputs a `<script>` tag with type `application/json` containing the JSON data.
+- Access the data in JavaScript by parsing the content of the generated `<script>` tag.
+
+### Considerations
+
+- **Security**: Be cautious when injecting data directly into JavaScript to avoid XSS (Cross-Site Scripting) vulnerabilities, especially with user-generated content. Always sanitize and validate the data.
+- **Performance**: For large amounts of data, consider fetching the data asynchronously via an API endpoint instead of embedding it directly into the template. This can improve page load times and overall performance.
+
+Each method has its use cases, with inline scripts being quick and straightforward, data attributes offering a clean separation of concerns, and the `json_script` tag providing a secure and robust way to pass complex data. Choose the method that best fits the complexity of your data and your project's architectural guidelines.
