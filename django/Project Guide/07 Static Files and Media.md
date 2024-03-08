@@ -6,11 +6,9 @@ Handling static and media files in Django is crucial for delivering CSS, JavaScr
 
 Static files are files that don't change, like CSS, JavaScript, and image files used to style and add functionality to your web pages.
 
-### Step 1: Understand Static Files
-
 Django collects static files from each of your applications (and any other places you specify) into a single location that can easily be served in production.
 
-### Step 2: Configure Settings
+### Step 1: Configure Settings
 
 In your `settings.py` file, you need to define a few settings related to static files:
 
@@ -27,7 +25,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / "staticfiles"  # Collect static to here for production
 ```
 
-### Step 3: Create Static Files Directory
+### Step 2: Create Static Files Directory
 
 Create the static files directory in the top level directory of your project
 
@@ -39,7 +37,7 @@ You can now create further directories inside this for `css` and `js` and create
 
 ### Step 4: Use Static Files in Templates
 
-To use static files in your templates, first load the `{% static %}` template tag:
+To use static files in your templates, first load the `{% static %}` template tag at the top of your template. You can then load static files as follows. We'll add the following code the `base.html` as we want it to be used on every page on our site.
 
 ```html
 {% load static %}
